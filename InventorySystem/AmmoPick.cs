@@ -14,7 +14,7 @@ public class AmmoPick : MonoBehaviour
     // Update is called once per frame
     public void Use()
     {
-        gun = _fireButton.GetComponent<Gun>();
+        gun = _fireButton.GetComponent<HealthFight.Gun>();
         gun.ammoCount += ammoCount;
         GameObject.Find("AmmoText").GetComponent<Text>().text = gun.ammoCount.ToString();
         Destroy(gameObject);
@@ -24,5 +24,5 @@ public class AmmoPick : MonoBehaviour
     public int ammoCount;
     
     private GameObject _fireButton;
-    private Gun gun;
+    private HealthFight.Gun gun;
 }

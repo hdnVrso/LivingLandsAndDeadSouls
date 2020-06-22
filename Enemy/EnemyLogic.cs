@@ -88,7 +88,7 @@ namespace Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetComponent<DamageComponent>() != null)
+            if (other.GetComponent<HealthFight.DamageComponent>() != null)
                 return;
             if (_walkDirection == 0)
                 _walkDirection = 2;

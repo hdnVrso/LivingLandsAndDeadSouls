@@ -60,7 +60,7 @@ namespace Enemy
             
             if (Vector2.Distance(transform.position, _target.position) < shotDistance && _fireCount <= 0)
             {
-                _bullet = Bullet.CreateFromBandit(this.transform, transform.position.x, transform.position.y, 5f, 10, 0.3f, _originID);
+                _bullet = HealthFight.Bullet.CreateFromBandit(this.transform, transform.position.x, transform.position.y, 5f, 10, 0.3f, _originID);
                 _fireCount = fireRate;
             }
             --_fireCount;
