@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Resources.scripts;
 
 
 namespace SaveLoadSystem
@@ -9,17 +8,17 @@ namespace SaveLoadSystem
     public class Load : MonoBehaviour
     {
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             LoadPlayer();
+            //LoadMap(); //TODO: need to implement map load method
             Destroy(this.gameObject);
         }
-
-
-        public void LoadPlayer()
+        
+        private void LoadPlayer()
         {
             Debug.Log("Continue");
-            PlayerData data = SaveSystem.LoadPlayer();
+            var data = SaveSystem.LoadPlayer();
             if (data == null)
                 return;
             var player = GameObject.Find("Player");
@@ -34,7 +33,6 @@ namespace SaveLoadSystem
                 {
                     case 0:
                         continue;
-                        break;
                     case 1:
                         Instantiate(medkitButton, playerInventory.slots[i].transform, false);
                         playerInventory.items[i] = 1;
@@ -75,7 +73,11 @@ namespace SaveLoadSystem
             }
         }
 
-        //data members
+        private void LoadMap()
+        {
+            
+        }
+        
         //data members
         public GameObject medkitButton;
         public GameObject meatButton;

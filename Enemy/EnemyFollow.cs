@@ -14,6 +14,7 @@ namespace Enemy
             _fireCount = fireRate;
             _enemylogic = this.gameObject.GetComponent<EnemyLogic>();
             _enemyAnimator = this.gameObject.GetComponent<EnemyAnimator>();
+            _fireCount = fireRate;
         }
         
         void Update()
@@ -21,7 +22,7 @@ namespace Enemy
             if (Vector2.Distance(transform.position, _target.position) > stoppingDistance &&
                 Vector2.Distance(transform.position, _target.position) < followDistance)
             {
-                _enemylogic.isActive = false;
+               //_enemylogic.isActive = false;
                 _enemyAnimator.isActive = true;
                 transform.position = Vector2.MoveTowards(transform.position, _target.position, speed * Time.deltaTime);
 
@@ -53,19 +54,20 @@ namespace Enemy
             }
             else
             {
-                _enemylogic.isActive = true;
-                _enemyAnimator.isActive = false;
+               // _enemylogic.isActive = true;
+               // _enemyAnimator.isActive = false;
 
             }
             
             if (Vector2.Distance(transform.position, _target.position) < shotDistance && _fireCount <= 0)
             {
-                _bullet = HealthFight.Bullet.CreateFromBandit(this.transform, transform.position.x, transform.position.y, 5f, 10, 0.3f, _originID);
+                _bullet = HealthFight.Bullet.CreateFromBandit(this.transform, _target, 30f, 5, 0.3f, _originID);
                 _fireCount = fireRate;
             }
             --_fireCount;
         }
-
+        
+        
         //data members
         public float speed;
         public int directionX;
@@ -76,9 +78,10 @@ namespace Enemy
         public int fireRate;
         
         private Transform _target;
+        private Rigidbody2D _targetRigidBody;
         private int _originID;
         private GameObject _bullet;
-        private int _fireCount;
+        private int _fireCount = 10;
         private EnemyLogic _enemylogic;
         private EnemyAnimator _enemyAnimator;
     } 

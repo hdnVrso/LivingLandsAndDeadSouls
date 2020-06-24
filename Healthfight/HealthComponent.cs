@@ -44,6 +44,7 @@ namespace HealthFight
             _bar.SetSize(health/100f);
             if (health > 0)
                 return;
+            //_animator.Play("Death");
             Destroy(_bar.gameObject);
             Destroy(this.gameObject);
             Destroy(other.gameObject);
@@ -55,5 +56,6 @@ namespace HealthFight
         public int originID;
         
         private HealthBar _bar;
+        private Animator _animator;
     }
 }//end of namespace HealthFight

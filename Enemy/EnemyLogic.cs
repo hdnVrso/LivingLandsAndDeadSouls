@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Resources.scripts;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
@@ -9,17 +8,15 @@ namespace Enemy
 {
     public class EnemyLogic : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _myRigidBody = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _waitCounter = waitTime;
             _walkCounter = waitTime;
         }
-
-        // Update is called once per frame
-        void Update()
+        
+        private void Update()
         {
             if (isActive == false)
             {
@@ -90,20 +87,26 @@ namespace Enemy
         {
             if (other.GetComponent<HealthFight.DamageComponent>() != null)
                 return;
-            if (_walkDirection == 0)
-                _walkDirection = 2;
-            else if (_walkDirection == 2)
-                _walkDirection = 0;
-            else if (_walkDirection == 1)
-                _walkDirection = 3;
-            else
-                _walkDirection = 1;
-            if (isWalking == false)
+            switch (_walkDirection)
             {
-                isWalking = true;
-                _waitCounter = 0;
-                _walkCounter = waitTime;
+                case 0:
+                    _walkDirection = 2;
+                    break;
+                case 2:
+                    _walkDirection = 0;
+                    break;
+                case 1:
+                    _walkDirection = 3;
+                    break;
+                default:
+                    _walkDirection = 1;
+                    break;
             }
+            if (isWalking != false) 
+                return;
+            isWalking = true;
+            _waitCounter = 0;
+            _walkCounter = waitTime;
         }
 
         //data members

@@ -52,7 +52,7 @@ namespace HealthFight
             return bulletGameObject;
         }
         
-        public static GameObject CreateFromBandit(Transform parentTransform, float directionX, float directionY, 
+        public static GameObject CreateFromBandit(Transform parentTransform, Transform targetPosition, 
             float speed, int damage, float damageRadius_, int originID)
         {
             var bulletGameObject = new GameObject("Bullet");
@@ -68,8 +68,8 @@ namespace HealthFight
                 
             var myRigidBody = bulletGameObject.AddComponent<Rigidbody2D>();
             myRigidBody.gravityScale = 0;
-            myRigidBody.velocity = new Vector2(speed * directionX, speed * directionY);
             bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(0, -0.1f, 0);
+            bulletGameObject.transform.position = Vector2.MoveTowards(bulletGameObject.transform.position, targetPosition.position, speed * Time.deltaTime);
                
             myRigidBody.mass = 0;
             myRigidBody.freezeRotation = true;
