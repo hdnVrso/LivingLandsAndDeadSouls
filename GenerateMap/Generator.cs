@@ -393,7 +393,6 @@ namespace GenerateMap
             }
         }
 
-        
         //data members
         public int width;
         public int height;

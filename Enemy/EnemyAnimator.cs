@@ -22,7 +22,7 @@ namespace Enemy
             {
                 if (_enemyFollow.directionY == 0)
                 {
-
+                    _animator.Play("IdleLeft");
                 }
                 else if (_enemyFollow.directionY > 0)
                 {
