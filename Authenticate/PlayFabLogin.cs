@@ -78,6 +78,11 @@ public class PlayFabLogin : MonoBehaviour
         {
             GameObject.Find("LoginFailed").GetComponent<Text>().text="Неправильный пароль или логин";
         }
+
+        if (errorReport[1] == "Invalid")
+        {
+            GameObject.Find("LoginFailed").GetComponent<Text>().text="Неправильный пароль или логин";
+        }
     }
 
     public void GetUserEmail(string email)
