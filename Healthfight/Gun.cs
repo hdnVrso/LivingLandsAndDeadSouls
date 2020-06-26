@@ -22,7 +22,7 @@ namespace HealthFight
 
         public void Use()
         {
-            _direction = _playerController.direction;
+            _direction = _playerController.moveVelocity;
             if (ammoCount <= 0)
                 return;
             for (int i = 0; i < fireRate; ++i)
@@ -44,7 +44,7 @@ namespace HealthFight
         public int damageBuff = 10;
 
         private int _originID;
-        private int _direction;
+        private Vector2 _direction;
         private float _damageRadius;
         private GameObject _bullet;
         private PlayerController _playerController;

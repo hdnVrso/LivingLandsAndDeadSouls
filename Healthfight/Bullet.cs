@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.UI;
 using UnityEngine;
 
 namespace HealthFight
 {
     public class Bullet : MonoBehaviour
     {
-        public static GameObject Create(Transform parentTransform, int direction, float speed, int damage, 
+        public static GameObject Create(Transform parentTransform, Vector2 direction, float speed, int damage, 
             float damageRadius_, int originID)
         {
             var bulletGameObject = new GameObject("Bullet");
@@ -24,25 +25,9 @@ namespace HealthFight
                 
             var myRigidBody = bulletGameObject.AddComponent<Rigidbody2D>();
             myRigidBody.gravityScale = 0;
-            switch (direction)
-            {
-                case 0:
-                    myRigidBody.velocity = new Vector2(0f, -speed);
-                    bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(0, -0.1f, 0);
-                    break;
-                case 1:
-                    myRigidBody.velocity = new Vector2(0f, speed);
-                    bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(0, 0.1f, 0);
-                    break;
-                case 2:
-                    myRigidBody.velocity = new Vector2(speed, 0f);
-                    bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(0.5f, 0.1f, 0);
-                    break;
-                case 3:
-                    myRigidBody.velocity = new Vector2(-speed, 0f);
-                    bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(-0.5f, 0.1f, 0);
-                    break;
-            }
+            myRigidBody.velocity = direction.normalized * speed;
+            
+            bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(-0.5f, 0.1f, 0);
             myRigidBody.mass = 0;
             myRigidBody.freezeRotation = true;
             bulletGameObject.AddComponent<Bullet>();
@@ -52,7 +37,7 @@ namespace HealthFight
             return bulletGameObject;
         }
         
-        public static GameObject CreateFromBandit(Transform parentTransform, Transform targetPosition, 
+        public static GameObject CreateFromBandit(Transform parentTransform, Transform target,
             float speed, int damage, float damageRadius_, int originID)
         {
             var bulletGameObject = new GameObject("Bullet");
@@ -65,11 +50,13 @@ namespace HealthFight
             dmgCmp.damage = damage;
             dmgCmp.originID = originID;
             dmgCmp.damageRadius = damageRadius_;
-                
+            
             var myRigidBody = bulletGameObject.AddComponent<Rigidbody2D>();
             myRigidBody.gravityScale = 0;
             bulletGameObject.transform.position = parentTransform.transform.position + new Vector3(0, -0.1f, 0);
-            bulletGameObject.transform.position = Vector2.MoveTowards(bulletGameObject.transform.position, targetPosition.position, speed * Time.deltaTime);
+            Vector2 moveDirection = (target.position - parentTransform.position).normalized * speed;
+            myRigidBody.velocity = moveDirection;
+            Debug.Log((target.position - parentTransform.position).normalized);
                
             myRigidBody.mass = 0;
             myRigidBody.freezeRotation = true;

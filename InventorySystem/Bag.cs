@@ -3,41 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bag : MonoBehaviour 
+namespace InventorySystem
 {
-
-    void Start()
+    public class Bag : MonoBehaviour
     {
-        _closeButton = GameObject.Find("CloseButton").GetComponent<ActiveController>();
-        _playerInventory = GameObject.Find("Player").GetComponent<Inventory>();
-        _skills = GameObject.Find("Skills");
-    }
 
-    public void OpenCloseBag() {
-        if (_isClosed == true)
+        void Start()
         {
-            foreach (var bagElement in _playerInventory.slots)
-            {
-                bagElement.SetActive(true);
-                _skills.SetActive(true);
-            }
-            _isClosed = false;
+            _closeButton = GameObject.Find("CloseButton").GetComponent<ActiveController>();
+            _playerInventory = GameObject.Find("Player").GetComponent<Inventory>();
+            _skills = GameObject.Find("Skills");
         }
-        else {
-            foreach (var bagElement in _playerInventory.slots)
+
+        public void OpenCloseBag()
+        {
+            if (_isClosed == true)
             {
-                bagElement.SetActive(false);
-                _skills.SetActive(false);
-                _closeButton.Disabled();
+                foreach (var bagElement in _playerInventory.slots)
+                {
+                    bagElement.SetActive(true);
+                    _skills.SetActive(true);
+                }
+
+                _isClosed = false;
             }
-            _isClosed = true;
+            else
+            {
+                foreach (var bagElement in _playerInventory.slots)
+                {
+                    bagElement.SetActive(false);
+                    _skills.SetActive(false);
+                    _closeButton.Disabled();
+                }
+
+                _isClosed = true;
+            }
         }
+
+        //data members
+        private ActiveController _closeButton;
+        private bool _isClosed;
+        private Inventory _playerInventory;
+        private GameObject _skills;
     }
-    
-    //data members
-    private ActiveController _closeButton;
-    private bool _isClosed;
-    private Inventory _playerInventory;
-    private GameObject _skills;
-}
+}// end of namespace InventorySystem
 
