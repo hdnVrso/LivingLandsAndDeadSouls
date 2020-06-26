@@ -10,8 +10,8 @@ namespace Enemy
     {
         private void Start()
         {
-            _myRigidBody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
+            _myRigidBody = this.gameObject.GetComponent<Rigidbody2D>();
+            _animator = this.gameObject.GetComponent<Animator>();
             _waitCounter = waitTime;
             _walkCounter = waitTime;
         }
@@ -51,6 +51,7 @@ namespace Enemy
 
                 isWalking = false;
                 _waitCounter = waitTime;
+                Debug.Log("Hey i am here");
                 switch (_walkDirection)
                 {
                     case 0:
@@ -85,7 +86,7 @@ namespace Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetComponent<HealthFight.DamageComponent>() != null)
+            if (other.GetComponent<HealthFight.DamageComponent>() != null && other.name == "Player")
                 return;
             switch (_walkDirection)
             {
