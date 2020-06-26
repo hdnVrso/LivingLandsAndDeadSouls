@@ -74,7 +74,7 @@ public class DestroyItem : MonoBehaviour
 
     private void DoubleClick()
     {
-        _destroyPanel = GameObject.Find("DestroyPanel");
+        _destroyPanel = GameObject.Find("FakePanel");
         Debug.Log("Set active destroy panel");
         _destroyPanel.SetActive(true);
         _destroyPanel.GetComponent<DestroyingItem>().destroyingItem = gameObject;

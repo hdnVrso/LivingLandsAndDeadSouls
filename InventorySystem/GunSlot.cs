@@ -63,6 +63,7 @@ namespace InventorySystem
         {
             if (isEmpty == 1)
             {
+                Debug.Log("Skin index: "+skinIndex);
                 _playerAnimator.runtimeAnimatorController = animatorOverrideWG[skinIndex];
                 return;
             }
