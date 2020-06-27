@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 
@@ -11,6 +12,7 @@ namespace Interaction
     {
         void Start()
         {
+            lootButton = GameObject.Find("InventoryCanvas").transform.GetChild(8).gameObject;
             _playerInventory = GameObject.Find("Player").GetComponent<InventorySystem.Inventory>();
             _playerHealthComponent = GameObject.Find("Player").GetComponent<HealthFight.HealthComponent>();
             _isLooted = false;
@@ -22,15 +24,19 @@ namespace Interaction
             if (_isLooted)
                 return;
             if (other.name == "Player")
+            {
                 lootButton.SetActive(true);
+                lootButton.GetComponent<Button>().onClick.RemoveListener(Use);
+            }
         }
 
         public void Use()
         {
             var i = Random.Range(0, loots.Length);
+            Debug.Log("Loot: " + i);
             if (i == loots.Length)
             {
-                _playerHealthComponent.IncreaseHealth(10);
+                _playerHealthComponent.DecreaseHealth(10);
                 return;
             }
             
@@ -53,7 +59,10 @@ namespace Interaction
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.name == "Player")
+            {
                 lootButton.SetActive(false);
+                lootButton.GetComponent<Button>().onClick.RemoveListener(Use);
+            }
         }
         
         //data members

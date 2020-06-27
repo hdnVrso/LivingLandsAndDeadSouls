@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -34,12 +35,18 @@ namespace HealthFight
         {
             _bar = HealthBar.Create(this.gameObject.transform, new Vector3(60f, 10f), 7f, Color.green, Color.grey, 100f, 0.4f);
         }
-
+        
         public void DecreaseHealth(int decrease)
         {
             health -= decrease;
             if (health <= 0)
             {
+                _animator.Play("Death_left");
+                if (isPlayer)
+                {
+                    
+                    SceneManager.LoadScene("Menu");
+                }
                 Destroy(this.gameObject);
                 return;
             }
@@ -58,7 +65,6 @@ namespace HealthFight
         {
             if (other.GetComponent<DamageComponent>() == null)
                 return;
-
             if (other.GetComponent<DamageComponent>().originID == this.originID)
                 return;
             health -= other.gameObject.GetComponent<DamageComponent>().damage;
@@ -67,8 +73,12 @@ namespace HealthFight
                 return;
             _animator.Play("Death_left");
             Destroy(_bar.gameObject);
-            Destroy(this.gameObject);
             Destroy(other.gameObject);
+            if (isPlayer)
+            {
+                SceneManager.LoadScene("Menu");
+            }
+            Destroy(this.gameObject);
         }
         
         //data members

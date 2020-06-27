@@ -68,6 +68,11 @@ namespace InventorySystem
             _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             _playerAnimator = GameObject.Find("Player").GetComponent<Animator>();
             _gunComponent = GameObject.Find("FireButton").GetComponent<HealthFight.Gun>();
+            _character = GameObject.Find("ParametersManager").GetComponent<ParameterManager>().CharacterI;
+            if (_character == 1)
+                _playerAnimator.runtimeAnimatorController = animatorOverrideWG[3];
+            else if (_character == 2)
+                _playerAnimator.runtimeAnimatorController = animatorOverrideWG[4];
         }
 
         public void ChangeSkin()
