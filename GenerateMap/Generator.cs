@@ -5,10 +5,8 @@ using UnityEngine.Tilemaps;
 using UnityEditor;
 
 
-
 namespace GenerateMap
 {
-
     public class Generator : MonoBehaviour
     {
         void Start()
@@ -20,7 +18,6 @@ namespace GenerateMap
             doSim();
         }
 
-
         public void doSim()
         {
             width = tmpSize.x;
@@ -30,12 +27,10 @@ namespace GenerateMap
             {
                 for (int y = 0; y < height; y++)
                 {
-
                     topMap.SetTile(new Vector3Int
                         (-x + width / 2, -y + height / 2, 0), waterTile);
                 }
             }
-
             //CreateHorizon();
             GenerateBuilding();
             GenerateTree();
@@ -53,7 +48,6 @@ namespace GenerateMap
                 {
                     waterTileMap.SetTile(new Vector3Int
                         (-x + width / 2, -y + height / 2, 0), horizontTile);
-
                 }
             }
 
@@ -63,7 +57,6 @@ namespace GenerateMap
                 {
                     waterTileMap.SetTile(new Vector3Int
                         (-x + width / 2, -y + height / 2, 0), horizontTile);
-
                 }
             }
 
@@ -73,7 +66,6 @@ namespace GenerateMap
                 {
                     waterTileMap.SetTile(new Vector3Int
                         (-x + width / 2, -y + height / 2, 0), horizontTile);
-
                 }
             }
 
@@ -83,7 +75,6 @@ namespace GenerateMap
                 {
                     waterTileMap.SetTile(new Vector3Int
                         (-x + width / 2, -y + height / 2, 0), horizontTile);
-
                 }
             }
         }
@@ -240,7 +231,6 @@ namespace GenerateMap
                         {
                             house = Instantiate(bigHouse);
                         }
-
                         render = house.GetComponent<SpriteRenderer>();
                         house.transform.position = new Vector3
                             (-coordX + width / 2, -coordY + height / 2, 0);
@@ -259,7 +249,6 @@ namespace GenerateMap
             }
         }
 
-
         public void GenerateTree()
         {
             float size;
@@ -271,25 +260,18 @@ namespace GenerateMap
             for (int i = 0; i < forestValue; i++)
             {
                 canGenerate = false;
-
                 while (canGenerate != true)
                 {
                     int xPar = Random.Range(0, height);
                     int yPar = Random.Range(0, width);
-
                     canGenerate = FindContent(xPar, yPar, 15);
-
                     if (canGenerate == true)
                     {
-
                         mapContent[xPar, yPar] = 4;
-
                         for (int j = 0; j < forestSize; j++)
                         {
                             int x = Random.Range(xPar - 5, xPar + 5);
                             int y = Random.Range(yPar - 5, yPar + 5);
-
-
                             tree = Instantiate(this.tree);
                             size = Random.Range(2.5f, 3);
                             tree.transform.localScale = new Vector3(size, size, 1);
@@ -314,14 +296,11 @@ namespace GenerateMap
             for (int i = 0; i < rockValue; i++)
             {
                 canGenerate = false;
-
                 while (canGenerate != true)
                 {
                     int xPar = Random.Range(0, height);
                     int yPar = Random.Range(0, width);
-
                     canGenerate = FindContent(xPar, yPar, 10);
-
                     if (canGenerate == true)
                     {
                         rock = Instantiate(this.rock);
@@ -335,15 +314,10 @@ namespace GenerateMap
                         for (int j = 0; j < sizeOfRockPlace; j++)
                         {
                             float size = Random.Range(0.5f, 2);
-
                             int x = Random.Range(xPar - 1, xPar + 1);
                             int y = Random.Range(yPar - 1, yPar + 1);
-
-
                             rock = Instantiate(this.rock);
-
                             rock.transform.localScale = new Vector3(size, size, 0);
-
                             rock.transform.position = new Vector3(width / 2 - x, height / 2 - y);
                             layer = rock.GetComponentInChildren<SpriteRenderer>();
                             layer.sortingOrder = height / 2 - (int) rock.transform.position.y;
