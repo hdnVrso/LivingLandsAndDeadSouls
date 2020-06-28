@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,29 @@ namespace HealthFight
             _direction = _playerController.moveVelocity;
             if (ammoCount <= 0)
                 return;
+            if (_direction == Vector2.zero)
+            {
+                switch (_playerController.direction)
+                {
+                    case 0:
+                        _bullet = Bullet.Create(_playerController.transform, new Vector2(0, -1),5f * fireRate, damage + damageBuff,
+                            _damageRadius, _originID);
+                        break;
+                    case 1:
+                        _bullet = Bullet.Create(_playerController.transform, new Vector2(0, 1), 5f * fireRate, damage + damageBuff,
+                            _damageRadius, _originID);
+                        break;
+                    case 2:
+                        _bullet = Bullet.Create(_playerController.transform,new Vector2(1, 0), 5f * fireRate, damage + damageBuff,
+                            _damageRadius, _originID);
+                        break;
+                    case 3:
+                        _bullet = Bullet.Create(_playerController.transform, new Vector2(-1, 0), 5f * fireRate, damage + damageBuff,
+                            _damageRadius, _originID);
+                        break;
+                }
+                return;
+            }
             for (int i = 0; i < fireRate; ++i)
             {
                 --ammoCount;

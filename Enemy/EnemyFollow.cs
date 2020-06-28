@@ -11,10 +11,10 @@ namespace Enemy
         {
             _target = GameObject.Find("Player").GetComponent<Transform>();
             _originID = this.gameObject.GetInstanceID();
-            _fireCount = fireRate;
+            _fireCount = fireDelay;
             _enemylogic = this.gameObject.GetComponent<EnemyLogic>();
             _enemyAnimator = this.gameObject.GetComponent<EnemyAnimator>();
-            _fireCount = fireRate;
+            _fireCount = fireDelay;
             _targetRB = GameObject.Find("Player").GetComponent<Rigidbody2D>();
             _enemylogic = this.gameObject.GetComponent<EnemyLogic>();
         }
@@ -58,13 +58,12 @@ namespace Enemy
             {
                _enemylogic.isActive = true;
                _enemyAnimator.isActive = false;
-
             }
             
             if (Vector2.Distance(transform.position, _target.position) < shotDistance && _fireCount <= 0)
             {
                 _bullet = HealthFight.Bullet.CreateFromBandit(this.transform, _target, 30f, 5, 0.3f, _originID);
-                _fireCount = fireRate;
+                _fireCount = fireDelay;
             }
             --_fireCount;
         }
@@ -77,14 +76,14 @@ namespace Enemy
         public float stoppingDistance;
         public float followDistance;
         public float shotDistance;
-        public int fireRate;
+        public int fireDelay;
         
         private Transform _target;
         private Rigidbody2D _targetRB;
         private Rigidbody2D _targetRigidBody;
         private int _originID;
         private GameObject _bullet;
-        private int _fireCount = 10;
+        private int _fireCount;
         private EnemyLogic _enemylogic;
         private EnemyAnimator _enemyAnimator;
     } 

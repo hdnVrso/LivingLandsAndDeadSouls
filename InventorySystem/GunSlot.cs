@@ -7,6 +7,7 @@ namespace InventorySystem
 {
     public class GunSlot : MonoBehaviour
     {
+        
         public void Cross()
         {
             var child1 = this.gameObject.transform.GetChild(0);
@@ -15,7 +16,17 @@ namespace InventorySystem
                 return;
             itemButton.GetComponent<GunSelect>().ammoCount =
                 GameObject.Find("FireButton").GetComponent<HealthFight.Gun>().ammoCount;
-            Debug.Log(itemButton);
+            if (skinIndex == 0)
+            {
+                switch (_character)
+                {
+                    case 0: break;
+                    case 1: skinIndex = 3;
+                        break;
+                    case 2: skinIndex = 4;
+                        break;
+                }
+            }
             _playerAnimator.runtimeAnimatorController = animatorOverrideWG[skinIndex];
             for (int i = 0; i < _playerInventory.items.Length; ++i)
             {
@@ -57,19 +68,32 @@ namespace InventorySystem
             _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             _playerAnimator = GameObject.Find("Player").GetComponent<Animator>();
             _gunComponent = GameObject.Find("FireButton").GetComponent<HealthFight.Gun>();
+            _character = GameObject.Find("ParametersManager").GetComponent<ParameterManager>().CharacterI;
+            if (_character == 1)
+                _playerAnimator.runtimeAnimatorController = animatorOverrideWG[3];
+            else if (_character == 2)
+                _playerAnimator.runtimeAnimatorController = animatorOverrideWG[4];
         }
 
         public void ChangeSkin()
         {
+            if (skinIndex == 0)
+            {
+                switch (_character)
+                {
+                    case 0: break;
+                    case 1: skinIndex = 3;
+                        break;
+                    case 2: skinIndex = 4;
+                        break;
+                }
+            }
             if (isEmpty == 1)
             {
                 _playerAnimator.runtimeAnimatorController = animatorOverrideWG[skinIndex];
                 return;
             }
-
-            Debug.Log(skinIndex);
             _playerAnimator.runtimeAnimatorController = animatorOverride[skinIndex];
-            Debug.Log("Changed skin");
         }
 
         //data members
@@ -82,5 +106,6 @@ namespace InventorySystem
         private HealthFight.Gun _gunComponent;
         private Inventory _playerInventory;
         private Animator _playerAnimator;
+        private int _character;
     }
 }
