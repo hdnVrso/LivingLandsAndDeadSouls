@@ -31,10 +31,12 @@ namespace SpawnSystem
                     Instantiate(commonAnimals[i], _spawnPosition, Quaternion.identity);
                 }
             }
+
+            Destroy(this.gameObject);
         }
 
+        
         //data members
-
         public GameObject[] enemyGameObjects;
         public GameObject[] commonAnimals;
         public float xAxisBeginOfRange;
