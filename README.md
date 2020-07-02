@@ -9,7 +9,7 @@
 * The names of variables (including function parameters) and public data members are all camelCase (lowerCamelCase)
 * The names of methods are all PascalCase (UpperCamelCase)
 * The names of private data members are all camelCase with leading underscore
-* The names of constants and static data members are all PascalCase
+* The names of constants and static data members are all UPPERCASE with underscores between words
 
 ## 2 Formating
 
