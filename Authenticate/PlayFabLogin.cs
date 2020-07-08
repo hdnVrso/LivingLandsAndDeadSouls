@@ -5,22 +5,20 @@ using PlayFab;
 using UnityEngine.UI;
 using PlayFab.ClientModels;
 using UnityEngine.SceneManagement;
-public class PlayFabLogin : MonoBehaviour
+
+namespace Authenticate
 {
-    private string userEmail;
-    private string userPassword;
-    private string username;
-    public GameObject loginPanel;
-    public InputField emailPanel;
+    public class PlayFabLogin : MonoBehaviour
+{
 
     //This method let to skip loginPanel and athenticate authomatically
     /*void Start()
     {
         if (PlayerPrefs.HasKey("EMAIL"))
         {
-            userEmail=PlayerPrefs.GetString("EMAIL");
-            userPassword=PlayerPrefs.GetString("PASSWORD");
-            var request = new LoginWithEmailAddressRequest { Email=userEmail, Password=userPassword };
+            _userEmail=PlayerPrefs.GetString("EMAIL");
+            _userPassword=PlayerPrefs.GetString("PASSWORD");
+            var request = new LoginWithEmailAddressRequest { Email=_userEmail, Password=_userPassword };
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailed);
         }
     }*/
@@ -29,8 +27,8 @@ public class PlayFabLogin : MonoBehaviour
     private void OnLoginSuccess(LoginResult result)
     {
         Debug.Log("User logged !");
-        PlayerPrefs.SetString("EMAIL", userEmail);
-        PlayerPrefs.SetString("PASSWORD", userPassword);
+        PlayerPrefs.SetString("EMAIL", _userEmail);
+        PlayerPrefs.SetString("PASSWORD", _userPassword);
         Debug.Log("Hello, user");
         SceneManager.LoadScene("Menu");
     }
@@ -38,8 +36,8 @@ public class PlayFabLogin : MonoBehaviour
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         Debug.Log("User registered !");
-        PlayerPrefs.SetString("EMAIL", userEmail);
-        PlayerPrefs.SetString("PASSWORD", userPassword);
+        PlayerPrefs.SetString("EMAIL", _userEmail);
+        PlayerPrefs.SetString("PASSWORD", _userPassword);
         OnClickLogin();
         SceneManager.LoadScene("Menu");
     }
@@ -48,21 +46,21 @@ public class PlayFabLogin : MonoBehaviour
     {
         Debug.LogError(error.GenerateErrorReport());
         string[] errorReport = error.GenerateErrorReport().Split();
-        if (errorReport[1]=="Username")
+        if (errorReport[1] == "Username")
         {
-            GameObject.Find("LoginFailed").GetComponent<Text>().text="Никнейм занят";
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Никнейм занят";
         }
-        else if (errorReport[1]=="Email")
+        else if (errorReport[1] == "Email")
         {
-            GameObject.Find("LoginFailed").GetComponent<Text>().text="Email занят или имеет неверный формат";
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Email занят или имеет неверный формат";
         }
-        else if (errorReport[4]=="Username:")
+        else if (errorReport[4] == "Username:")
         {
-            GameObject.Find("LoginFailed").GetComponent<Text>().text="Логин может содержать буквы латинницы";
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Логин может содержать буквы латинницы";
         }
-        else if (errorReport[4]=="Password:")
+        else if (errorReport[4] == "Password:")
         {
-            GameObject.Find("LoginFailed").GetComponent<Text>().text="Неверный формат пароля";
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Неверный формат пароля";
         }
     }
 
@@ -70,41 +68,52 @@ public class PlayFabLogin : MonoBehaviour
     {
         Debug.Log(error.GenerateErrorReport());
         string[] errorReport = error.GenerateErrorReport().Split();
-        if (errorReport[4]=="host")
+        if (errorReport[1] == "User")
         {
-            GameObject.Find("LoginFailed").GetComponent<Text>().text="Отсутствует соединение с сетью Интернет";
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Данный пользователь не найден";
         }
-        if (errorReport[4]=="Email:")
+        if (errorReport[4] == "host")
         {
-            GameObject.Find("LoginFailed").GetComponent<Text>().text="Неправильный пароль или логин";
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Отсутствует соединение с сетью Интернет";
+        }
+        if (errorReport[4] == "Email:")
+        {
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Неправильный пароль или логин";
+        }
+
+        if (errorReport[1] == "Invalid")
+        {
+            GameObject.Find("LoginFailed").GetComponent<Text>().text = "Неправильный пароль или логин";
         }
     }
 
     public void GetUserEmail(string email)
     {
 
-        userEmail=email;
+        _userEmail = email;
     }
 
     public void GetUserPassword(string password)
     {
-        userPassword=password;
+        _userPassword = password;
     }
 
     public void OnClickLogin()
     {
-            var request = new LoginWithEmailAddressRequest { Email=userEmail, Password=userPassword };
+            var request = new LoginWithEmailAddressRequest { Email = _userEmail,
+                Password = _userPassword };
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailed);
     }
 
     public void GetUsername(string username)
     {
-        this.username=username;
+        this._username = username;
     }
 
     public void OnClickRegister()
     {
-        var registerRequest = new RegisterPlayFabUserRequest { Email=userEmail, Password=userPassword, Username=username };
+        var registerRequest = new RegisterPlayFabUserRequest { Email = _userEmail, 
+            Password = _userPassword, Username = _username };
         PlayFabClientAPI.RegisterPlayFabUser(registerRequest, OnRegisterSuccess, OnRegisterFailure);
     }
 
@@ -113,7 +122,7 @@ public class PlayFabLogin : MonoBehaviour
     {
         string email = emailPanel.text;
         var request = new SendAccountRecoveryEmailRequest();
-        request.Email=email;
+        request.Email = email;
         request.TitleId="99BF5";
         PlayFab.PlayFabClientAPI.SendAccountRecoveryEmail(request, OnRecoveryEmailSuccess, OnRecoveryEmailFailed);
 
@@ -129,4 +138,12 @@ public class PlayFabLogin : MonoBehaviour
     {
         Debug.LogError(error.GenerateErrorReport());
     }
+    
+    public GameObject loginPanel;
+    public InputField emailPanel;
+    
+    private string _userEmail;
+    private string _userPassword;
+    private string _username;
+}
 }

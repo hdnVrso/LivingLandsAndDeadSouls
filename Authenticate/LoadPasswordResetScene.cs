@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadPasswordResetScene : MonoBehaviour
+namespace Authenticate
 {
-    public void LoadScene()
+    public class LoadPasswordResetScene : MonoBehaviour
     {
-        SceneManager.LoadScene("PasswordReset");
+        public void LoadScene()
+        {
+            SceneManager.LoadScene("PasswordReset");
+        }
     }
 }

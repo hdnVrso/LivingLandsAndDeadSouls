@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class BackToStart : MonoBehaviour
+
+namespace Authenticate
 {
-    public void LoadFirstPageScene()
+    public class BackToStart : MonoBehaviour
     {
-        SceneManager.LoadScene("FirstPage");
+        public void LoadFirstPageScene()
+        {
+            SceneManager.LoadScene("FirstPage");
+        }
     }
 }

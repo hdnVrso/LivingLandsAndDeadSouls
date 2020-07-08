@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class StartMenu : MonoBehaviour
-{
-    public void LoadRegisterScene()
-    {
-        SceneManager.LoadScene("Register");
-    }
 
-    public void LoadLoginScene()
+namespace Authenticate
+{
+    public class StartMenu : MonoBehaviour
     {
-        SceneManager.LoadScene("Login");
+        public void LoadRegisterScene()
+        {
+            SceneManager.LoadScene("Register");
+        }
+
+        public void LoadLoginScene()
+        {
+            SceneManager.LoadScene("Login");
+        }
     }
 }
