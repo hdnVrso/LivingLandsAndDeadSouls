@@ -65,5 +65,4 @@ namespace Player
         private Image _joystick;
         private Vector2 _inputVector;
     }
-
 }

@@ -9,18 +9,18 @@ using UnityEngine.SceneManagement;
 namespace Authentication
 {
     public class PlayFabLogin : MonoBehaviour
-{
-    
-    /*void Start()
     {
-        if (PlayerPrefs.HasKey("EMAIL"))
+        
+        /*void Start()
         {
-            _userEmail=PlayerPrefs.GetString("EMAIL");
-            _userPassword=PlayerPrefs.GetString("PASSWORD");
-            var request = new LoginWithEmailAddressRequest { Email=_userEmail, Password=_userPassword };
-            PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailed);
-        }
-    }*/
+            if (PlayerPrefs.HasKey("EMAIL"))
+            {
+                _userEmail=PlayerPrefs.GetString("EMAIL");
+                _userPassword=PlayerPrefs.GetString("PASSWORD");
+                var request = new LoginWithEmailAddressRequest { Email=_userEmail, Password=_userPassword };
+                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailed);
+            }
+        }*/
 
 
     private void OnLoginSuccess(LoginResult result)
@@ -88,7 +88,6 @@ namespace Authentication
 
     public void GetUserEmail(string email)
     {
-
         _userEmail = email;
     }
 
@@ -99,9 +98,9 @@ namespace Authentication
 
     public void OnClickLogin()
     {
-            var request = new LoginWithEmailAddressRequest { Email = _userEmail,
-                Password = _userPassword };
-            PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailed);
+        var request = new LoginWithEmailAddressRequest { Email = _userEmail, 
+            Password = _userPassword };
+        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailed);
     }
 
     public void GetUsername(string username)
@@ -122,9 +121,8 @@ namespace Authentication
         string email = emailPanel.text;
         var request = new SendAccountRecoveryEmailRequest();
         request.Email = email;
-        request.TitleId="99BF5";
+        request.TitleId = "99BF5";
         PlayFab.PlayFabClientAPI.SendAccountRecoveryEmail(request, OnRecoveryEmailSuccess, OnRecoveryEmailFailed);
-
     }
 
     public void OnRecoveryEmailSuccess(SendAccountRecoveryEmailResult result)

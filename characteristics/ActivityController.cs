@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Characteristics
 {
-    public class ActiveController : MonoBehaviour
+    public class ActivityController : MonoBehaviour
     {
         private GameObject characteristics;
 
@@ -19,7 +19,7 @@ namespace Characteristics
             characteristics.GetComponent<AllParameters>().Display();
         }
 
-        public void Disabled()
+        public void Disable()
         {
             characteristics.GetComponent<Canvas>().enabled = false;
         }

@@ -47,7 +47,6 @@ namespace Characteristics
             case 2:
                 _playerName = "Vitali Tsal";
                 break;
-                
         }
         _personName = GameObject.Find("Person name");
         _valueFreePoints = GameObject.Find("ValueFreePoints");
@@ -74,7 +73,6 @@ namespace Characteristics
             }
         }
     }
-    
     //data members
     public float experience = 0;
     public int level = 1;

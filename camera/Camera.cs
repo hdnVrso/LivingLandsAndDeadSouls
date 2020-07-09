@@ -15,14 +15,15 @@ namespace Camera
         // Update is called once per frame
         void FixedUpdate()
         {
-            GetCoord();
+            ChangeCameraPosition();
         }
 
-        void GetCoord()
+        void ChangeCameraPosition()
         {
             _player = GameObject.FindGameObjectWithTag("Player").transform;
             transform.position = new Vector3(_player.position.x, _player.position.y, transform.position.z);
         }
+        //data members
         public float dumping = 1.5f;
         public Vector2 offset = new Vector2(2f, 1f);
         public int country;

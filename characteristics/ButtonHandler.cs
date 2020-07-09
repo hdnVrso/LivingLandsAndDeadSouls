@@ -7,7 +7,7 @@ namespace Characteristics
 {
     public class ButtonHandler : MonoBehaviour
     {
-        public void UpStrength()
+        public void BuffStrength()
         {
             characteristics = GameObject.Find("Characteristics");
             if (characteristics.GetComponent<AllParameters>().freePoints > 0)
@@ -19,7 +19,7 @@ namespace Characteristics
             }
         }
 
-        public void UpHealth()
+        public void BuffHealth()
         {
             characteristics = GameObject.Find("Characteristics");
             if (characteristics.GetComponent<AllParameters>().freePoints > 0)
@@ -31,7 +31,7 @@ namespace Characteristics
             }
         }
 
-        public void UpSniper()
+        public void BuffSniper()
         {
             characteristics = GameObject.Find("Characteristics");
             if (characteristics.GetComponent<AllParameters>().freePoints > 0)
