@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Player
 {
     public class PlayerController : MonoBehaviour
-{
+    {
     void Start()
     {
         _height = GameObject.Find("ParametersManager").GetComponent
@@ -14,31 +14,30 @@ namespace Player
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _soundOfRun = GameObject.Find("RunSound").GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-        mContr = GameObject.Find("JoystickBG").GetComponent<MobileController>();
+        mobileController = GameObject.Find("JoystickBG").GetComponent<MobileController>();
         Debug.Log("Controller is initialized");
         rigidBody = GetComponent<Rigidbody2D>();
-        _anim = GetComponent<Animator>();
     }
     void Update()
     {
-        if (mContr.Horizontal() > 0.9)
+        if (mobileController.Horizontal() > 0.9)
         {
                 direction = 2;
                 animator.Play("Move_right");
             }
-            else if (mContr.Horizontal() < -0.9)
+            else if (mobileController.Horizontal() < -0.9)
             {
                 direction = 3;
                 animator.Play("Move_left");
             }
             else 
             {
-                if (mContr.Vertical() > 0)
+                if (mobileController.Vertical() > 0)
                 {
                     direction = 1;
                     animator.Play("Move_back");
                 }
-                else if (mContr.Vertical() < 0)
+                else if (mobileController.Vertical() < 0)
                 {
                     direction = 0;
                     animator.Play("Move_face");
@@ -63,8 +62,8 @@ namespace Player
                 }
             }
         
-            _dirX = mContr.Horizontal();
-            _dirY = mContr.Vertical();
+            _dirX = mobileController.Horizontal();
+            _dirY = mobileController.Vertical();
             Vector2 moveInput = new Vector2(_dirX, _dirY);
             moveVelocity = moveInput * playerSpeed;
             if (_dirX == 0 && _dirY == 0)
@@ -92,7 +91,7 @@ namespace Player
     public Animator animator;
     public float playerSpeed = 0.25f;
     public Vector2 moveVelocity;
-    public MobileController mContr;
+    public MobileController mobileController;
 
     private int _height;
     private SpriteRenderer _spriteRenderer;
@@ -101,7 +100,5 @@ namespace Player
     private float _dirY;
     private GameObject _bullet;
     private Rigidbody2D rigidBody;
-    private Animator _anim;
-    
 }
 }

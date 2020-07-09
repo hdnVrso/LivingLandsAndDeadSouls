@@ -6,12 +6,11 @@ using UnityEngine.UI;
 using PlayFab.ClientModels;
 using UnityEngine.SceneManagement;
 
-namespace Authenticate
+namespace Authentication
 {
     public class PlayFabLogin : MonoBehaviour
 {
-
-    //This method let to skip loginPanel and athenticate authomatically
+    
     /*void Start()
     {
         if (PlayerPrefs.HasKey("EMAIL"))

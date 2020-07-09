@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Authenticate
+namespace Authentication
 {
     public class StartMenu : MonoBehaviour
     {

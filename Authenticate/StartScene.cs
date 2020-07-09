@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Authenticate
+namespace Authentication
 {
-    public class BackToStart : MonoBehaviour
+    public class StartScene : MonoBehaviour
     {
         public void LoadFirstPageScene()
         {
