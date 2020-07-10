@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 namespace Authentication
 {
-    public class LoadPasswordResetScene : MonoBehaviour
+    public class StartScene : MonoBehaviour
     {
-        public void LoadScene()
+        public void LoadFirstPageScene()
         {
-            SceneManager.LoadScene("PasswordReset");
+            SceneManager.LoadScene("FirstPage");
         }
     }
 }
