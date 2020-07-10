@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
@@ -10,7 +10,7 @@ namespace Authentication
 {
     public class PlayFabLogin : MonoBehaviour
     {
-        
+
         /*void Start()
         {
             if (PlayerPrefs.HasKey("EMAIL"))
@@ -135,10 +135,10 @@ namespace Authentication
     {
         Debug.LogError(error.GenerateErrorReport());
     }
-    
+
     public GameObject loginPanel;
     public InputField emailPanel;
-    
+
     private string _userEmail;
     private string _userPassword;
     private string _username;

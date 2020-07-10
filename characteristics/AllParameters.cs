@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Menu;
 using UnityEngine;
@@ -81,7 +81,7 @@ namespace Characteristics
     public int health;
     public int sniper;
     public int freePoints;
-    
+
     private GameObject valueSniper;
     private GameObject _personName;
     private GameObject _valueHealth;

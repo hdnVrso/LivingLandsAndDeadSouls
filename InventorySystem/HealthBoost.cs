@@ -14,14 +14,7 @@ namespace InventorySystem
 
         public void Use()
         {
-            if (_playerHealth.health + healthBoost > 100)
-            {
-                _playerHealth.health = 100;
-                Destroy(gameObject);
-                return;
-            }
-
-            _playerHealth.health += healthBoost;
+            _playerHealth.IncreaseHealth(healthBoost);
             Destroy(gameObject);
         }
 

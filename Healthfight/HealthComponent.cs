@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,11 +27,31 @@ namespace HealthFight
             circleCollider.radius = 0.3f;
             circleCollider.isTrigger = true;
             health = 100;
+            _animator = this.gameObject.GetComponent<Animator>();
         }
 
         private void CreateHealthBar()
         {
             _bar = HealthBar.Create(this.gameObject.transform, new Vector3(60f, 10f), 7f, Color.green, Color.grey, 100f, 0.4f);
+        }
+
+        public void DecreaseHealth(int decrease)
+        {
+            health -= decrease;
+            if (health <= 0)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            _bar.SetSize(health);
+        }
+
+        public void IncreaseHealth(int increase)
+        {
+            health += increase;
+            if (health > 100)
+                health = 100;
+            _bar.SetSize(health);
         }
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -44,7 +65,7 @@ namespace HealthFight
             _bar.SetSize(health/100f);
             if (health > 0)
                 return;
-            //_animator.Play("Death");
+            _animator.Play("Death_left");
             Destroy(_bar.gameObject);
             Destroy(this.gameObject);
             Destroy(other.gameObject);
