@@ -1,5 +1,5 @@
 # WARNING!!!!!
-This repository is example of VERY VERY bad code/programming practice. `MAKE SURE TO TAKE AWAY FROM SCREENS PEOPLE WITH WEAK NERVES`
+This repository is an example of VERY VERY bad code/programming practice. `MAKE SURE TO TAKE AWAY FROM SCREENS PEOPLE WITH WEAK NERVES`
 
 # Code Style Conventions
 1. Naming rules
